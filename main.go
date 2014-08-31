@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"github.com/platypus-platform/pp-logging"
 	"github.com/platypus-platform/pp-store"
@@ -23,10 +24,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	config := IptablesConfig{
-		PortAuthorityConfig: "/tmp/portauthority.d",
-		PortAuthorityPath:   "port_authority",
-	}
+	var config IptablesConfig
+
+	flag.StringVar(&config.PortAuthorityConfig, "config-dir",
+		"/tmp/portauthority.d", "config directory for portauthority")
+	flag.StringVar(&config.PortAuthorityPath, "cmd",
+		"port_authority", "binary for portauthority")
+	flag.Parse()
 
 	err = pp.PollIntent(hostname, func(intent pp.IntentNode) {
 		for _, app := range intent.Apps {
