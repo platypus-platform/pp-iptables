@@ -27,7 +27,7 @@ func main() {
 	var config IptablesConfig
 
 	flag.StringVar(&config.PortAuthorityConfig, "config-dir",
-		"/tmp/portauthority.d", "config directory for portauthority")
+		"fake/portauthority.d", "config directory for portauthority")
 	flag.StringVar(&config.PortAuthorityPath, "cmd",
 		"port_authority", "binary for portauthority")
 	flag.Parse()
